@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint-type-test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Lint (Black, Ruff, isort, Bandit)
+        run: |
+          black --check .
+          ruff .
+          isort --check-only .
+          bandit -r proxy
+
+      - name: Type check (mypy)
+        run: mypy --strict .
+
+      - name: Run tests (pytest)
+        run: pytest -q
+
+      - name: Build Docker image
+        run: docker build -t llm-firewall .
+
