@@ -1,0 +1,12 @@
+# requirements-dev.txt  (tooling)
+black==24.4.*
+ruff==0.4.*
+isort==5.13.*
+mypy==1.*
+pytest==8.*
+pytest-asyncio==0.23.*
+hypothesis==6.*
+bandit==1.7.*
+semgrep==1.*
+pre-commit==3.*
+coverage==7.*           # optional coverage reports
