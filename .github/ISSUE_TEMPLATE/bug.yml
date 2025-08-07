@@ -1,0 +1,40 @@
+name: 🐞 Bug
+description: Report something that isn’t working right
+title: "[BUG]: "
+labels: [type/bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What’s the problem?
+      description: Describe the issue clearly and briefly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce (if known)
+      description: Help future-you recreate this issue.
+      placeholder: |
+        1. Run...
+        2. Open...
+        3. Error appears
+    validations:
+      required: false
+
+  - type: input
+    id: expected
+    attributes:
+      label: What should have happened instead?
+    validations:
+      required: false
+
+  - type: input
+    id: phase
+    attributes:
+      label: Roadmap Phase
+      placeholder: Phase 3 – Evaluation
+    validations:
+      required: false
+
