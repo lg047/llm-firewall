@@ -15,28 +15,6 @@ body:
     id: why
     attributes:
       label: Why is it needed?
-      description: Explain why this matters (technical or strategic).
-    validations:
-      required: false
-
-  - type: textarea
-    id: criteria
-    attributes:
-      label: Acceptance criteria
-      description: What needs to be true for this to be considered 
-complete?
-      placeholder: |
-        - Handles edge cases
-        - Passes all tests
-        - Clean code
-    validations:
-      required: false
-
-  - type: input
-    id: phase
-    attributes:
-      label: Roadmap Phase
-      placeholder: Phase 2 – Proxy Layer
     validations:
       required: false
 
