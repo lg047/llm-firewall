@@ -1,16 +1,33 @@
-# LLM Firewall
+# LLM Safety-Proxy
 
+A drop-in reverse-proxy that anonymises prompts, filters risky AI output, and stores tamper-proof logs — so small & mid-size teams can ship AI features without leaking data or breaking GDPR / EU-AI-Act rules.
 
-All code changes are subjected to an automated validation pipeline prior to acceptance.
+---
 
-    Black ensures consistent code formatting.
+## Why you’d use it
 
-    Ruff performs linting to identify errors and style issues.
+* **Blocks leaks** – masks credit-cards, emails, IDs before they reach the model  
+* **Stops jailbreaks & toxicity** – open-source guards + Grok copy-check  
+* **Audit in one click** – every prompt/response hashed & stored WORM-locked in S3  
+* **Model-agnostic** – point it at OpenAI today, Grok or Ollama tomorrow  
+* **Five-minute setup** – swap your API URL, drop in the starter YAML policy  
 
-    isort enforces consistent ordering of import statements.
+---
 
-    mypy performs strict type checking to prevent type‑related defects.
+## Quick-start (local run)
 
-    Bandit conducts static security analysis to detect potential vulnerabilities.
+```bash
+# 1. clone & enter repo
+git clone https://github.com/<you>/llm-firewall.git
+cd llm-firewall
 
-All unit and integration tests, including asynchronous tests, are executed with pytest, with coverage measurement to ensure a high proportion of the codebase is tested. Only changes that pass these checks are packaged into a deployable Docker image. The pipeline executes both locally via pre‑commit hooks and remotely via GitHub Actions on every push and pull request.
+# 2. set up dev-container OR local venv (choose one)
+#    a) VS Code: “Reopen in Container”   – or –
+python -m venv .venv && source .venv/bin/activate
+
+# 3. install deps
+pip install -r requirements.txt -r requirements-dev.txt
+pre-commit install     # auto-format on save / commit
+
+# 4. run proxy
+uvicorn proxy.entry:app --reload  # now listening on http://localhost:8000
